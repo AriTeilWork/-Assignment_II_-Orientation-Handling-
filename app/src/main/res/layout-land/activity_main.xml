@@ -20,60 +20,18 @@
             android:adjustViewBounds="true"/>
 
 
-        <EditText
-            android:id="@+id/first_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="First Name"
-            android:inputType="textPersonName"/>
-
-        <EditText
-            android:id="@+id/last_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Last Name"
-            android:inputType="textPersonName"/>
-
-        <EditText
-            android:id="@+id/birthday"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Birthday"
-            android:inputType="date"/>
-
-        <EditText
-            android:id="@+id/phone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Phone"
-            android:inputType="phone"/>
-
-        <EditText
-            android:id="@+id/home"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Home Address"
-            android:inputType="textPostalAddress"/>
-
-        <EditText
-            android:id="@+id/email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Email"
-            android:inputType="textEmailAddress"/>
-
         <TextView
-            android:id="@+id/random_number_label"
+            android:id="@+id/random_number_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Random number"
+            android:text="Current Random Number: "
             android:textSize="20sp"/>
 
         <TextView
-            android:id="@+id/last_random_number_label"
+            android:id="@+id/saved_random_number_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Last random number"
+            android:text="Saved Random Number: "
             android:textSize="16sp"/>
 
     </LinearLayout>
