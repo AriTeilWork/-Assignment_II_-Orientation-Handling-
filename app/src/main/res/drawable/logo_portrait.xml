@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="120dp"
+    android:viewportWidth="200"
+    android:viewportHeight="120">
+    <!-- Portrait Logo - Vertical Design -->
+    <path
+        android:fillColor="#2196F3"
+        android:pathData="M100,20 L120,60 L100,100 L80,60 Z"/>
+    <path
+        android:fillColor="#1976D2"
+        android:pathData="M100,20 L100,100 L80,60 Z"/>
+    <!-- Small top circle (cx=100, cy=20, r=8) -->
+    <path
+        android:fillColor="#2196F3"
+        android:pathData="M100,12 a8,8 0 1,0 0,16 a8,8 0 1,0 0,-16"/>
+    <!-- Small bottom circle (cx=100, cy=100, r=8) -->
+    <path
+        android:fillColor="#1976D2"
+        android:pathData="M100,92 a8,8 0 1,0 0,16 a8,8 0 1,0 0,-16"/>
+</vector>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="300dp"
+    android:height="100dp"
+    android:viewportWidth="300"
+    android:viewportHeight="100">
+    <!-- Landscape Logo - Horizontal Design -->
+    <path
+        android:fillColor="#4CAF50"
+        android:pathData="M50,50 L70,30 L90,50 L70,70 Z"/>
+    <path
+        android:fillColor="#388E3C"
+        android:pathData="M50,50 L70,70 L70,30 Z"/>
+    <!-- Simple bars using path rectangles -->
+    <path
+        android:fillColor="#4CAF50"
+        android:pathData="M110,40 h150 v20 h-150 z"/>
+    <path
+        android:fillColor="#388E3C"
+        android:pathData="M110,65 h120 v15 h-120 z"/>
+</vector>
