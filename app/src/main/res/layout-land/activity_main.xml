@@ -2,147 +2,36 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fillViewport="true">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:gravity="center_horizontal">
+        android:padding="16dp">
 
-        <!-- Logo -->
         <ImageView
             android:id="@+id/logo_image"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="150dp"
             android:src="@drawable/logo_landscape"
             android:contentDescription="@string/logo_desc"
             android:scaleType="fitCenter"
-            android:adjustViewBounds="true"
-            android:layout_marginBottom="24dp"/>
+            android:adjustViewBounds="true"/>
 
-        <!-- First Name -->
         <TextView
-            android:layout_width="match_parent"
+            android:id="@+id/random_number_text_view"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/first_name_label"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="4dp"/>
+            android:text="Current Random Number: "
+            android:textSize="20sp"/>
 
-        <EditText
-            android:id="@+id/first_name_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/first_name_hint"
-            android:inputType="textPersonName"
-            android:minHeight="48dp"
-            android:padding="12dp"
-            android:background="@android:drawable/edit_text"/>
-
-        <!-- Last Name -->
         <TextView
-            android:layout_width="match_parent"
+            android:id="@+id/saved_random_number_text_view"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/last_name_label"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="4dp"/>
-
-        <EditText
-            android:id="@+id/last_name_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/last_name_hint"
-            android:inputType="textPersonName"
-            android:minHeight="48dp"
-            android:padding="12dp"
-            android:background="@android:drawable/edit_text"/>
-
-        <!-- Birthday -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/birthday_label"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="4dp"/>
-
-        <EditText
-            android:id="@+id/birthday_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/birthday_hint"
-            android:inputType="date"
-            android:minHeight="48dp"
-            android:padding="12dp"
-            android:background="@android:drawable/edit_text"/>
-
-        <!-- Phone Number -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/phone_label"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="4dp"/>
-
-        <EditText
-            android:id="@+id/phone_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/phone_hint"
-            android:inputType="phone"
-            android:minHeight="48dp"
-            android:padding="12dp"
-            android:background="@android:drawable/edit_text"/>
-
-        <!-- Home Address (Landscape only) -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/home_address_label"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="4dp"/>
-
-        <EditText
-            android:id="@+id/home_address_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/home_address_hint"
-            android:inputType="textPostalAddress"
-            android:minHeight="48dp"
-            android:padding="12dp"
-            android:background="@android:drawable/edit_text"
-            android:lines="2"/>
-
-        <!-- Email Address (Landscape only) -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/email_label"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="4dp"/>
-
-        <EditText
-            android:id="@+id/email_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/email_hint"
-            android:inputType="textEmailAddress"
-            android:minHeight="48dp"
-            android:padding="12dp"
-            android:background="@android:drawable/edit_text"/>
+            android:text="Saved Random Number: "
+            android:textSize="16sp"/>
 
     </LinearLayout>
 </ScrollView>

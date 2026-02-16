@@ -1,73 +1,90 @@
 package com.example.assignment_ii_orientationhandling;
 
 import android.os.Bundle;
-import android.widget.EditText;
+import android.os.Handler;
+import android.os.Looper;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Date;
+import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class MainActivity extends AppCompatActivity {
 
-    // EditText fields
-    private EditText firstNameEditText;
-    private EditText lastNameEditText;
-    private EditText birthdayEditText;
-    private EditText phoneEditText;
-    private EditText homeAddressEditText;
-    private EditText emailEditText;
+    private TextView randomNumberTextView, savedRandomNumberTextView;
 
-    // Keep values for fields not present in some orientations
-    private String homeAddressValue = "";
-    private String emailValue = "";
+    // Latest random number that was shown before an orientation change
+    private int lastRandomNumber = 0;
+    // Time (in millis) when the last orientation change happened
+    private long lastOrientationChangeTime = 0L;
 
-    // Keys for saving state
-    private static final String KEY_FIRST_NAME = "firstName";
-    private static final String KEY_LAST_NAME = "lastName";
-    private static final String KEY_BIRTHDAY = "birthday";
-    private static final String KEY_PHONE = "phone";
-    private static final String KEY_HOME_ADDRESS = "homeAddress";
-    private static final String KEY_EMAIL = "email";
+    private Timer timer;
+
+    private final Handler handler = new Handler(Looper.getMainLooper());
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Initialize EditText fields
-        firstNameEditText = findViewById(R.id.first_name_edit_text);
-        lastNameEditText = findViewById(R.id.last_name_edit_text);
-        birthdayEditText = findViewById(R.id.birthday_edit_text);
-        phoneEditText = findViewById(R.id.phone_edit_text);
-        
-        // These fields only exist in landscape layout - will be null in portrait
-        homeAddressEditText = findViewById(R.id.home_address_edit_text);
-        emailEditText = findViewById(R.id.email_edit_text);
+        randomNumberTextView = findViewById(R.id.random_number_text_view);
+        savedRandomNumberTextView = findViewById(R.id.saved_random_number_text_view);
 
-        // Restore saved state if available
         if (savedInstanceState != null) {
-            restoreFormData(savedInstanceState);
+            lastRandomNumber = savedInstanceState.getInt("lastRandomNumber", 0);
+            lastOrientationChangeTime = savedInstanceState.getLong("lastTime", 0L);
+
+            // Show the last random number that was visible before the orientation change
+            savedRandomNumberTextView.setText("Saved Random Number: " + lastRandomNumber);
+
+            // Show the time of the last orientation change in a Toast
+            if (lastOrientationChangeTime != 0L) {
+                Toast.makeText(
+                        this,
+                        "Orientation changed at: " + new Date(lastOrientationChangeTime),
+                        Toast.LENGTH_SHORT
+                ).show();
+            }
         }
     }
 
-    /**
-     * Restores form data from saved instance state
-     */
-    private void restoreFormData(Bundle savedInstanceState) {
-        firstNameEditText.setText(savedInstanceState.getString(KEY_FIRST_NAME, ""));
-        lastNameEditText.setText(savedInstanceState.getString(KEY_LAST_NAME, ""));
-        birthdayEditText.setText(savedInstanceState.getString(KEY_BIRTHDAY, ""));
-        phoneEditText.setText(savedInstanceState.getString(KEY_PHONE, ""));
-
-        // Restore landscape-only values even if views are missing in portrait
-        homeAddressValue = savedInstanceState.getString(KEY_HOME_ADDRESS, "");
-        emailValue = savedInstanceState.getString(KEY_EMAIL, "");
-
-        if (homeAddressEditText != null) {
-            homeAddressEditText.setText(homeAddressValue);
+    private void startRandomNumberTimer() {
+        // Avoid creating multiple timers if startRandomNumberTimer is called twice for some reason
+        if (timer != null) {
+            return;
         }
-        if (emailEditText != null) {
-            emailEditText.setText(emailValue);
+
+        timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                handler.post(() -> {
+                    int number = new Random().nextInt(100);
+                    randomNumberTextView.setText("Current Random Number: " + number);
+                    lastRandomNumber = number;
+                });
+            }
+        }, 0, 1000);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        startRandomNumberTimer();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (timer != null) {
+            timer.cancel();
+            timer = null;
         }
     }
 
@@ -75,18 +92,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
 
-        // Save all form field values
-        outState.putString(KEY_FIRST_NAME, firstNameEditText.getText().toString());
-        outState.putString(KEY_LAST_NAME, lastNameEditText.getText().toString());
-        outState.putString(KEY_BIRTHDAY, birthdayEditText.getText().toString());
-        outState.putString(KEY_PHONE, phoneEditText.getText().toString());
-        
-        // Save landscape-only values even when current layout is portrait
-        String homeToSave = homeAddressEditText != null ? homeAddressEditText.getText().toString() : homeAddressValue;
-        String emailToSave = emailEditText != null ? emailEditText.getText().toString() : emailValue;
-
-        outState.putString(KEY_HOME_ADDRESS, homeToSave);
-        outState.putString(KEY_EMAIL, emailToSave);
+        outState.putInt("lastRandomNumber", lastRandomNumber);
+        lastOrientationChangeTime = System.currentTimeMillis();
+        outState.putLong("lastTime", lastOrientationChangeTime);
     }
 }
-
